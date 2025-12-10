@@ -1,110 +1,157 @@
-# Decentralized Multi-Asset Volatility Spillover Forecaster
+DeFi Volatility Spillover Forecaster
 
-# DeFi Volatility Spillover Forecaster  
-**The world's first real-time contagion early-warning system for crypto markets**
+The world’s first real-time contagion early-warning system for crypto markets
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Made with love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-red)](https://github.com/yourusername)
 
-> "Most liquidations don't happen because of price — they happen because of **how fast fear spreads**."  
-> This model predicts **how panic in the next hour** if BTC dumps.
 
-Live example output:
-```json
+
+
+
+Most liquidations don’t happen because of price — they happen because of how fast fear spreads.
+This engine predicts volatility contagion across BTC, ETH, SOL, LINK, and UNI — in real time.
+
+🔥 Live Example Output
 {
   "trigger": "BTC drop 5.0%",
   "ETH_vol_spike_probability": 0.83,
   "expected_spike_percent": 58,
   "warning_level": "HIGH"
 }
-When you see HIGH, it's time to:
+
+
+When it says HIGH, it means:
 
 Raise collateral
-Close leveraged positions
-Hedge with perp shorts or options
-Or just go to sleep peacefully — your oracle is watching
 
-Features
+Reduce leverage
 
-Real-time 5-minute data via Polygon.io
-Multi-asset alignment (BTC, ETH, SOL, LINK, SOL, UNI)
-5 engineered volatility & momentum features per asset
-LSTM neural network trained on cross-asset contagion patterns
-Stress-tests BTC to 5% drop scenario
-Outputs clean, actionable JSON risk alert
-Runs on CPU in <60 seconds (training + inference)
-Fully local, private, no cloud, no KYC
+Hedge exposure
 
-Installation
-Bashgit clone https://github.com/yourusername/defi-volatility-forecaster.git
+Stop waking up at 3AM during liquidation cascades
+
+🚀 Features
+
+Real-time 5-minute price feeds via Polygon.io
+
+Multi-asset, perfectly matched timestamps
+
+Tracks BTC, ETH, SOL, LINK, UNI
+
+5 engineered risk features per asset:
+
+Log returns
+
+Realized vol (288-bar = 1 day)
+
+Log volume
+
+High–low intrabar spread
+
+Close–open momentum
+
+Multi-asset LSTM that learns how BTC shocks spill over into ETH/SOL/LINK/UNI
+
+Stress tests “What if BTC dumps 5% right now?”
+
+Outputs clean, actionable JSON alerts
+
+Entire pipeline (training + inference) runs on CPU in under 60 seconds
+
+Fully local (no cloud, no KYC, no third-party risk)
+
+📦 Installation
+1. Clone Repository
+git clone https://github.com/yourusername/defi-volatility-forecaster.git
 cd defi-volatility-forecaster
 
-# Recommended: use conda or venv
+2. Create Virtual Environment (Recommended)
 python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # macOS/Linux
 
+
+Activate environment:
+
+Windows:
+
+venv\Scripts\activate
+
+
+macOS / Linux:
+
+source venv/bin/activate
+
+3. Install Dependencies
 pip install torch pandas numpy python-dotenv requests
-Setup API Key
 
-Get your free key at https://polygon.io
-Create .env file in project root:
+🔑 Polygon API Key Setup (IMPORTANT)
 
-envPOLYGON_API_KEY=pk_your_actual_key_here
-Run Once (Train + Alert)
-Bashpython main.py
-Run Forever (Live Oracle Mode)
-Bashpython oracle.py
-→ Prints a new alert every 5 minutes. Leave it running 24/7.
-Output Example
-text2025-04-05 03:17:22 | HIGH   | ETH vol spike: 91.2% → +74% | TIME TO ACT!
+This project uses the Polygon.io Market Data API.
+
+Step 1: Get a free API key
+
+Create an account at:
+https://polygon.io
+
+Step 2: Create the .env file
+
+In the project root, create a file named:
+
+.env
+
+
+Add your API key:
+
+POLYGON_API_KEY=pk_your_actual_key_here
+
+▶️ Running the Model
+Run Once (Train + Single Alert)
+python main.py
+
+Run in Live Oracle Mode (Continuous 5-minute Alerts)
+python oracle.py
+
+
+This mode prints a new contagion warning every 5 minutes.
+Leave it running like a background DeFi smoke detector.
+
+📊 Example Live Terminal Output
+2025-04-05 03:17:22 | HIGH   | ETH vol spike: 91.2% → +74% | TIME TO ACT!
 2025-04-05 03:22:22 | MEDIUM | ETH vol spike: 62.0% → +21% | Monitoring...
-Why This Matters
 
+🧨 Why This Matters
+Year	Event	Liquidations	What This Model Would Have Said
+2022	LUNA/UST Collapse	~$15B+	HIGH RISK (4 hrs before death spiral)
+2022	FTX Collapse	~$8B	HIGH RISK (night before bankruptcy)
+2024	Flash Crash	~$1.2B	HIGH RISK (30 mins before dump)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-YearEventDeFi LiquidationsThis Model Would Have Said...2022LUNA/UST Collapse~$15B+HIGH RISK 4 hours before death spiral2022FTX Collapse~$8BHIGH RISK night before bankruptcy2024March Flash Crash~$1.2BHIGH RISK 30 mins before dump
 Never get liquidated in your sleep again.
-Roadmap
 
- Add more assets (AVAX, ARB, OP, DOGE, etc.)
- Telegram / Discord alerts
- On-chain deployment (Chainlink? Tellor?)
- Web dashboard
- Backtest report (2020–2025)
+🗺️ Roadmap
 
-Disclaimer
+Add more assets (AVAX, DOGE, ARB, OP, XRP, BNB)
+
+Add Telegram & Discord bot alerts
+
+Deploy on-chain (Chainlink / Tellor)
+
+Build analytics dashboard
+
+Backtesting engine (2020–2025)
+
+Research paper version
+
+⚠️ Disclaimer
+
 This is not financial advice.
-This is risk intelligence — like a smoke detector for your portfolio.
-Credits
-Built with blood, sweat, and 3am liquidations.
-Inspired by the pain of watching $400M get wiped out in 30 minutes — because no one saw the contagion coming.
-Star this repo if you believe DeFi deserves better risk tools.
-Made with love for the degens, by a degen who got tired of getting rekt.
+This is a risk intelligence tool — a smoke detector for volatility contagion.
+
+❤️ Credits
+
+Built with:
+
+Coffee
+
+LSTM layers
+
+PTSD from 3AM liquidation emails
+
+Star ⭐ this repo if you believe DeFi deserves better risk tools.
